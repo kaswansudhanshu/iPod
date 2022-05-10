@@ -1,5 +1,12 @@
+import React from "react";
+import { Menu } from "./Menu";
+
 const Screen = () => {
-  return <div className="screen"></div>;
+  return (
+    <div className="screen">
+      <Menu />
+    </div>
+  );
 };
 
-export default Screen
+export default Screen;
