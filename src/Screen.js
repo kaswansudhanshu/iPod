@@ -1,10 +1,10 @@
 import React from "react";
 import { Menu } from "./Menu";
 
-const Screen = () => {
+const Screen = (props) => {
   return (
     <div className="screen">
-      <Menu />
+      <Menu menuOptions={props.menuOption} />
     </div>
   );
 };

@@ -1,15 +1,18 @@
 import React from "react";
 import ZingTouch from "zingtouch";
 
-export const Menu = () => {
+export const Menu = (props) => {
   React.useEffect(() => {
+    document.querySelector(".menu-list").firstChild.classList.add("active");
     let [currentAngle, prevAngle] = [0, 0];
     let nextActive, currActiveElement, moveNext;
+
     currActiveElement = document.querySelector(".active");
     const target = document.getElementById("rotatable");
     const region = new ZingTouch.Region(target);
 
     region.bind(target, "rotate", function (e) {
+      // currActiveElement = document.querySelector(".active");
       const distFromLast = e.detail.distanceFromLast;
       currentAngle += distFromLast;
       target.style.transform = "rotate(" + currentAngle + "deg)";
@@ -21,8 +24,9 @@ export const Menu = () => {
         prevAngle = currentAngle;
         nextActive = currActiveElement.nextElementSibling;
         if (!nextActive) {
-          nextActive = currActiveElement.closest(".menu-list").firstChild;
+          nextActive = currActiveElement.parentElement.firstChild;
         }
+        console.log(nextActive);
         currActiveElement.classList.remove("active");
         nextActive.classList.add("active");
         currActiveElement = nextActive;
@@ -33,7 +37,7 @@ export const Menu = () => {
         nextActive = currActiveElement.previousElementSibling;
 
         if (!nextActive) {
-          nextActive = currActiveElement.closest(".menu-list").lastChild;
+          nextActive = currActiveElement.parentElement.lastChild;
         }
 
         currActiveElement.classList.remove("active");
@@ -43,14 +47,14 @@ export const Menu = () => {
     });
   }, []);
 
+  const { title, options } = props.menuOptions[0];
   return (
     <div className="Menu">
-      <h4 className="menu-title">iPod.js</h4>
+      <h4 className="menu-title">{title}</h4>
       <ul className="menu-list">
-        <li className="active">Cover Flow</li>
-        <li>Music</li>
-        <li>Games</li>
-        <li>Settings</li>
+        {options.map((option, i) => {
+          return <li key={i}>{option}</li>;
+        })}
       </ul>
     </div>
   );
