@@ -2,16 +2,16 @@ import React from "react";
 import ZingTouch from "zingtouch";
 
 const Buttons = () => {
-  React.useEffect(() => {
-    let currentAngle = 15;
-    let target = document.getElementById("rotatable");
-    let region = new ZingTouch.Region(target);
+  // React.useEffect(() => {
+  //   let currentAngle = 15;
+  //   let target = document.getElementById("rotatable");
+  //   let region = new ZingTouch.Region(target);
 
-    region.bind(target, "rotate", function (e) {
-      currentAngle += e.detail.distanceFromLast;
-      target.style.transform = "rotate(" + currentAngle + "deg)";
-    });
-  }, []);
+  //   region.bind(target, "rotate", function (e) {
+  //     currentAngle += e.detail.distanceFromLast;
+  //     target.style.transform = "rotate(" + currentAngle + "deg)";
+  //   });
+  // }, []);
   return (
     <div className="buttons">
       <div className="rotatable" id="rotatable"></div>
