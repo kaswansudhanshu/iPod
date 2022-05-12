@@ -4,7 +4,7 @@ import { Menu } from "./Menu";
 const Screen = (props) => {
   return (
     <div className="screen">
-      <Menu menuOptions={props.menuOption} />
+      <Menu menuOptions={props.menuOption} currMenu={props.currMenu} />
     </div>
   );
 };
