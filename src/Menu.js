@@ -3,24 +3,28 @@ import { rotater } from "./rotater";
 
 export const Menu = (props) => {
   let altText = document.querySelector(".active");
+
+  const { currMenu } = props;
   React.useEffect(() => {
-    if (props.currMenu === 0) {
-    } else if (props.currMenu === "x") {
-      document.querySelector(".Home_screen").style.backgroundColor = "white";
+    if (currMenu === 0) {
+    } else if (currMenu === "x") {
+      document.querySelector(".alt_screen").style.backgroundColor = "white";
     } else rotater();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (props.currMenu === 0) {
-    return <div className="Home_screen"></div>;
+    return <div className="home_screen"></div>;
   } else if (props.currMenu === "x") {
     return (
-      <div className="Home_screen">
+      <div className="alt_screen">
         <h2>{altText.textContent}</h2>
       </div>
     );
   }
 
-  const { title, options } = props.menuOptions[0];
+  const [{ title, options }] = props.menuOptions;
   return (
     <div className="Menu">
       <h4 className="menu-title">{title}</h4>
