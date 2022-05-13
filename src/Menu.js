@@ -26,7 +26,7 @@ export const Menu = (props) => {
 
   const [{ title, options }] = props.menuOptions;
   return (
-    <div className="Menu">
+    <div className="Menu" style={{ background: props.deviceTheme }}>
       <h4 className="menu-title">{title}</h4>
       <ul className="menu-list">
         {options.map((option, i) => {

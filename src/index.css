@@ -42,13 +42,16 @@ body {
 
 .Navbar {
   position: absolute;
+  top: -1px;
+  left: -1px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  width: 100%;
+  width: 101%;
   height: 7px;
   border-bottom: 1px solid grey;
   padding-bottom: 0.23rem;
   background-color: rgba(255, 255, 255, 0.56);
+  transition: all 0.5s ease-in-out;
 }
 
 .nav_icons {
@@ -93,6 +96,7 @@ body {
   position: absolute;
   z-index: 1;
   background: transparent;
+  transition: all 0.5s ease-in-out;
 }
 
 /* Button Container */
@@ -115,6 +119,7 @@ body {
 .Menu {
   position: absolute;
   top: -1px;
+  left: -1px;
   width: 60%;
   height: 101%;
   background: #fff;

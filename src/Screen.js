@@ -15,24 +15,39 @@ const Screen = (props) => {
     homeScreenWall,
     deviceTheme,
   } = props;
-  console.log(deviceTheme);
   return (
     <div
       className="screen"
       style={{
-        background: `url(${props.homeScreenWall}) no-repeat center/cover`,
+        background: `url(${homeScreenWall}) no-repeat center/cover`,
       }}
     >
-      <Navbar />
-      {currMenu === 0 && <Menu currMenu={currMenu} />}
-      {currMenu === "x" && <Menu currMenu={currMenu} />}
-      {currMenu === 1 && <Menu menuOptions={mainMenu} />}
-      {currMenu === 2 && <Menu menuOptions={musicMenu} />}
-      {currMenu === 3 && <Menu menuOptions={gamesMenu} />}
-      {currMenu === 4 && <Menu menuOptions={settingMenu} />}
-      {currMenu === 5 && <Menu menuOptions={songMenu} />}
-      {currMenu === 6 && <Menu menuOptions={themeMenu} />}
-      {currMenu === 7 && <Menu menuOptions={wallpaperMenu} />}
+      <Navbar deviceTheme={deviceTheme} />
+      {currMenu === 0 && <Menu currMenu={currMenu} deviceTheme={deviceTheme} />}
+      {currMenu === "x" && (
+        <Menu currMenu={currMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 1 && (
+        <Menu menuOptions={mainMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 2 && (
+        <Menu menuOptions={musicMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 3 && (
+        <Menu menuOptions={gamesMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 4 && (
+        <Menu menuOptions={settingMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 5 && (
+        <Menu menuOptions={songMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 6 && (
+        <Menu menuOptions={themeMenu} deviceTheme={deviceTheme} />
+      )}
+      {currMenu === 7 && (
+        <Menu menuOptions={wallpaperMenu} deviceTheme={deviceTheme} />
+      )}
     </div>
   );
 };

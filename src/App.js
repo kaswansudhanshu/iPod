@@ -43,7 +43,7 @@ class App extends React.Component {
       currMenu: 0,
       homeScreenWall:
         "https://images.unsplash.com/photo-1589846666775-479db3829d33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80",
-      deviceTheme: "#fff",
+      deviceTheme: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)",
       menuIndexes: {
         Music: 2,
         Games: 3,
@@ -52,7 +52,7 @@ class App extends React.Component {
         Themes: 6,
         Wallpapers: 7,
       },
-      subMenuImgs: {
+      subMenuData: {
         Wallpaper1:
           "https://images.unsplash.com/photo-1534488821539-74be34b3e521?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
         Wallpaper2:
@@ -61,10 +61,10 @@ class App extends React.Component {
           "https://images.unsplash.com/photo-1651173862055-19ac99fe6b7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
         Wallpaper4:
           "https://images.unsplash.com/photo-1500042600524-37ecb686c775?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        Theme1: "#7D647B",
-        Theme2: "#A98889",
-        Theme3: "#8384DF",
-        Theme4: "#2ECFCA",
+        Theme1: "linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%)",
+        Theme2: "linear-gradient(315deg, #fad0c4 0%, #f1a7f1 74%)",
+        Theme3: "linear-gradient(315deg, #bbf0f3 0%, #f6d285 74%)",
+        Theme4: "linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%)",
         Games:
           "https://images.unsplash.com/photo-1642056446459-1f10774273f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
       },
@@ -84,6 +84,10 @@ class App extends React.Component {
       this.handleWallpaperChange();
       return;
     }
+    if (currMenu === 6) {
+      this.handleThemeChange();
+      return;
+    }
     const selectedMenu = document.querySelector(".active");
     currMenu = this.state.menuIndexes[selectedMenu.textContent];
 
@@ -94,9 +98,17 @@ class App extends React.Component {
 
   handleWallpaperChange = () => {
     const wallpaperSelected = document.querySelector(".active").textContent;
-    const wallpaperUrl = this.state.subMenuImgs[wallpaperSelected];
+    const wallpaperUrl = this.state.subMenuData[wallpaperSelected];
     this.setState({
       homeScreenWall: wallpaperUrl,
+    });
+  };
+
+  handleThemeChange = () => {
+    const themeSelected = document.querySelector(".active").textContent;
+    const themeHashCode = this.state.subMenuData[themeSelected];
+    this.setState({
+      deviceTheme: themeHashCode,
     });
   };
 
@@ -131,6 +143,7 @@ class App extends React.Component {
         <Buttons
           handleMenu={this.handleMenuTransversal}
           showMenu={this.handleShowMenu}
+          deviceTheme={deviceTheme}
         />
       </div>
     );

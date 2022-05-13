@@ -2,7 +2,7 @@ import React from "react";
 
 export const Navbar = (props) => {
   return (
-    <div className="Navbar">
+    <div className="Navbar" style={{ background: props.deviceTheme }}>
       <div className="nav_icons">
         <img
           src="https://cdn-icons-png.flaticon.com/512/566/566280.png"

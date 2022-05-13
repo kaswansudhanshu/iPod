@@ -1,11 +1,16 @@
 import React from "react";
 
 const Buttons = (props) => {
+  const { deviceTheme, showMenu, handleMenu } = props;
   return (
     <div className="buttons">
-      <div className="rotatable" id="rotatable"></div>
+      <div
+        className="rotatable"
+        id="rotatable"
+        style={{ background: `${deviceTheme}` }}
+      ></div>
       <div className="buttons-container">
-        <button type="button" id="menu-btn" onClick={props.showMenu}>
+        <button type="button" id="menu-btn" onClick={showMenu}>
           Menu
         </button>
         <div className="center-btns">
@@ -15,7 +20,7 @@ const Buttons = (props) => {
               alt="previous"
             />
           </button>
-          <button type="button" id="select" onClick={props.handleMenu}></button>
+          <button type="button" id="select" onClick={handleMenu}></button>
           <button type="button" id="forward">
             <img
               src="https://cdn-icons-png.flaticon.com/512/660/660276.png"
