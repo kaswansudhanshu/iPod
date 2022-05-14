@@ -10,7 +10,9 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      // Menu and their sub-menus
       mainMenu: [{ title: "Menu", options: ["Music", "Games", "Settings"] }],
+
       musicMenu: [
         {
           title: "Music",
@@ -44,10 +46,11 @@ class App extends React.Component {
           options: ["Wallpaper1", "Wallpaper2", "Wallpaper3", "Wallpaper4"],
         },
       ],
-      currMenu: 0,
+
+      // Homescreen wallpaper
       homeScreenWall:
         "https://images.unsplash.com/photo-1589846666775-479db3829d33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80",
-      deviceTheme: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)",
+
       menuIndexes: {
         Music: 2,
         Games: 3,
@@ -57,6 +60,8 @@ class App extends React.Component {
         Wallpapers: 7,
         MusicPlayer: 8,
       },
+
+      // Themes and wallpapers
       subMenuData: {
         Wallpaper1:
           "https://images.unsplash.com/photo-1534488821539-74be34b3e521?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
@@ -103,55 +108,77 @@ class App extends React.Component {
           artist: "Jack Harlow",
         },
       ],
-      playerVisible: false,
-      isPlaying: false,
-      songIndex: 0,
+
+      currMenu: 0, // current menu active - homescreen
+      deviceTheme: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)", // default theme
+      playerVisible: false, //hide music player
+      isPlaying: false, //pauses the song
+      songIndex: 0, //current song
     };
   }
 
+  //Show main menu and Home Screen
   handleShowMenu = () => {
     if (this.state.currMenu === 1) {
       this.setState({ currMenu: 0 });
     } else {
       this.setState({ currMenu: 1 });
     }
+    // hide the music player if visible
     this.setState({
       playerVisible: false,
     });
   };
 
+  //Handle center button click for menu change
   handleMenuTransversal = () => {
     let currMenu = this.state.currMenu;
     if (currMenu === "x" || currMenu === 0) return;
 
+    //if song menu is active open music player
     if (currMenu === 5) {
       this.handleSongPlayer();
       return;
     }
 
+    //if theme menu is active change theme
     if (currMenu === 6) {
       this.handleThemeChange();
       return;
     }
+
+    // if wallpaper menu is active change menu
     if (currMenu === 7) {
       this.handleWallpaperChange();
       return;
     }
+
+    // if music player is on screen do nothing
     if (currMenu === 8) {
       return;
     }
+
+    // Else render the sub menus
     const selectedMenu = document.querySelector(".active");
+
+    // get the index of menu clicked on
     currMenu = this.state.menuIndexes[selectedMenu.textContent];
 
     if (currMenu) {
       this.setState({ currMenu });
+
+      // if dummy menu option is selected
     } else this.setState({ currMenu: "x" });
   };
 
+  // if song is selected , loads it to the player and plays
   handleSongPlayer = () => {
     const songSelected = document.querySelector(".active").textContent;
     const [songMenu] = this.state.songMenu;
     const songIndex = songMenu.options.indexOf(songSelected);
+
+    // open the musicplayer
+    // play the song and update the index
     this.setState({
       currMenu: 8,
       isPlaying: true,
@@ -162,6 +189,24 @@ class App extends React.Component {
     return;
   };
 
+  //Play next song if current song ended
+  songEnded = () => {
+    let { songIndex, songList } = this.state;
+
+    // if last song in list stop the music player
+    if (songIndex === songList.length - 1) {
+      this.setState({
+        isPlaying: false,
+      });
+    } else {
+      songIndex += 1;
+      this.setState({
+        songIndex,
+      });
+    }
+  };
+
+  //Change Homescreen wallpaper
   handleWallpaperChange = () => {
     const wallpaperSelected = document.querySelector(".active").textContent;
     const wallpaperUrl = this.state.subMenuData[wallpaperSelected];
@@ -170,6 +215,7 @@ class App extends React.Component {
     });
   };
 
+  //Change Device theme
   handleThemeChange = () => {
     const themeSelected = document.querySelector(".active").textContent;
     const themeHashCode = this.state.subMenuData[themeSelected];
@@ -209,6 +255,7 @@ class App extends React.Component {
       songIndex,
     });
   };
+
   prevTrack = () => {
     let { songIndex, songList } = this.state;
     // Go back to the last track if the
@@ -255,6 +302,7 @@ class App extends React.Component {
           isPlaying={isPlaying}
           songIndex={songIndex}
           playerVisible={playerVisible}
+          songEnded={this.songEnded}
         />
 
         <Buttons

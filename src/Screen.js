@@ -19,6 +19,7 @@ const Screen = (props) => {
     isPlaying,
     songIndex,
     playerVisible,
+    songEnded,
   } = props;
   return (
     <div
@@ -27,7 +28,10 @@ const Screen = (props) => {
         background: `url(${homeScreenWall}) no-repeat center/cover`,
       }}
     >
+      {/* Nav bar for notifications */}
       <Navbar deviceTheme={deviceTheme} />
+
+      {/* Menu and their corresponding index and subMenu lists */}
       {currMenu === 0 && <Menu currMenu={currMenu} deviceTheme={deviceTheme} />}
       {currMenu === "x" && (
         <Menu currMenu={currMenu} deviceTheme={deviceTheme} />
@@ -53,19 +57,14 @@ const Screen = (props) => {
       {currMenu === 7 && (
         <Menu menuOptions={wallpaperMenu} deviceTheme={deviceTheme} />
       )}
-      {/* {currMenu === 8 && (
-        <MusicPlayer
-          songList={songList}
-          isPlaying={isPlaying}
-          songIndex={songIndex}
-        />
-      )} */}
 
+      {/* music player renders along with the screen for better functionality */}
       <MusicPlayer
         songList={songList}
         isPlaying={isPlaying}
         songIndex={songIndex}
         playerVisible={playerVisible}
+        songEnded={songEnded}
       />
     </div>
   );

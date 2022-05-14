@@ -1,33 +1,43 @@
 import React from "react";
+
+// songs to be played
+// eslint-disable-next-line
 import pasoori from "./songs/pasoori.mp3";
+// eslint-disable-next-line
 import i_love_u from "./songs/i_love_you.mp3";
+// eslint-disable-next-line
 import as_it_was from "./songs/as_it_was.mp3";
+// eslint-disable-next-line
 import first_class from "./songs/first_class.mp3";
 
-let updateTimer, seek_slider, curr_time, total_duration;
-let curr_track = document.createElement("audio");
-let curr_song_playing;
+let updateTimer, seek_slider, curr_time, total_duration, curr_song_playing;
+
+let curr_track = document.createElement("audio"); //Create a new html Audio element
 
 export class MusicPlayer extends React.Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
+    //select the elements after they are created in DOM
     seek_slider = document.querySelector(".seek-slider");
     curr_time = document.querySelector(".current-time");
     total_duration = document.querySelector(".total-duration");
+
     const { songIndex } = this.props;
     curr_song_playing = songIndex;
+
+    //Load the default first track
     this.loadTrack(songIndex);
   }
 
   componentDidUpdate() {
     const { isPlaying, songIndex } = this.props;
+
+    // Check if the song playing is changed
     if (songIndex !== curr_song_playing) {
       this.loadTrack(songIndex);
       curr_song_playing = songIndex;
     }
+    // Play song if selected from the songs menu
+    // Play/Pause if the play/pause button is clicked
     if (!isPlaying) {
       curr_track.pause();
     } else {
@@ -35,25 +45,32 @@ export class MusicPlayer extends React.Component {
     }
   }
 
+  //Load track onto the player
+  // render the duration details
   loadTrack = (songIndex) => {
     const { songList } = this.props;
     clearInterval(updateTimer);
     this.resetValues();
 
+    //change the source of song
     curr_track.src = songList[songIndex].songUrl;
     curr_track.load();
+
+    //start the seeker and update duration
     updateTimer = setInterval(this.seekUpdate, 1000);
   };
 
+  //Resets the values of previous song played
   resetValues = () => {
     curr_time.textContent = "00:00";
     total_duration.textContent = "00:00";
     seek_slider.value = 0;
   };
 
+  //update the seeker to current time of song
   seekUpdate = () => {
     let seekPosition = 0;
-    // console.log("seeked");
+
     // Check if the current track duration is a legible number
     if (!isNaN(curr_track.duration)) {
       seekPosition = curr_track.currentTime * (100 / curr_track.duration);
@@ -86,6 +103,9 @@ export class MusicPlayer extends React.Component {
       // Display the updated duration
       curr_time.textContent = currentMinutes + ":" + currentSeconds;
       total_duration.textContent = durationMinutes + ":" + durationSeconds;
+
+      if (curr_track.duration === curr_track.currentTime)
+        this.props.songEnded();
     }
   };
 
