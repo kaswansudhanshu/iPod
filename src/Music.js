@@ -1,8 +1,12 @@
 import React from "react";
-import pasoori from "./songs/pasori.mp3";
+import pasoori from "./songs/pasoori.mp3";
+import i_love_u from "./songs/i_love_you.mp3";
+import as_it_was from "./songs/as_it_was.mp3";
+import first_class from "./songs/first_class.mp3";
 
 let updateTimer, seek_slider, curr_time, total_duration;
 let curr_track = document.createElement("audio");
+let curr_song_playing;
 
 export class MusicPlayer extends React.Component {
   constructor() {
@@ -13,15 +17,17 @@ export class MusicPlayer extends React.Component {
     seek_slider = document.querySelector(".seek-slider");
     curr_time = document.querySelector(".current-time");
     total_duration = document.querySelector(".total-duration");
-    const { isPlaying, songIndex } = this.props;
+    const { songIndex } = this.props;
+    curr_song_playing = songIndex;
     this.loadTrack(songIndex);
-    if (isPlaying) {
-      curr_track.play();
-    }
   }
 
   componentDidUpdate() {
-    const { isPlaying } = this.props;
+    const { isPlaying, songIndex } = this.props;
+    if (songIndex !== curr_song_playing) {
+      this.loadTrack(songIndex);
+      curr_song_playing = songIndex;
+    }
     if (!isPlaying) {
       curr_track.pause();
     } else {

@@ -1,7 +1,10 @@
 import React from "react";
 import Buttons from "./Buttons";
 import Screen from "./Screen";
-import pasoori from "./songs/pasori.mp3";
+import pasoori from "./songs/pasoori.mp3";
+import i_love_u from "./songs/i_love_you.mp3";
+import as_it_was from "./songs/as_it_was.mp3";
+import first_class from "./songs/first_class.mp3";
 
 class App extends React.Component {
   constructor() {
@@ -29,7 +32,7 @@ class App extends React.Component {
       songMenu: [
         {
           title: "Songs",
-          options: ["Pasoori", "Song2", "Song3", "Song4"],
+          options: ["Pasoori", "As it Was", "I Love U", "First Class"],
         },
       ],
       themeMenu: [
@@ -75,8 +78,29 @@ class App extends React.Component {
           title: "Pasoori",
           songUrl: pasoori,
           songImg:
-            "https://th.bing.com/th/id/OIP.UWSvU0veAEDSwzsEj0hUCwHaEK?pid=ImgDet&rs=1",
+            "https://neemopani.com/wp-content/uploads/2022/04/Pasoori-768x432.jpg",
           artist: "Coke Studio",
+        },
+        {
+          title: "As it Was",
+          songUrl: as_it_was,
+          songImg:
+            "https://cdn-0.justrandomthings.com/wp-content/uploads/2019/12/Capture-32.jpg?ezimgfmt=rs%3Adevice%2Frscb1-1",
+          artist: "Harry Styles",
+        },
+        {
+          title: "I Love You",
+          songUrl: i_love_u,
+          songImg:
+            "https://ia800903.us.archive.org/18/items/mbid-ea5889f0-dc28-4e99-965b-0069e5c1bbed/mbid-ea5889f0-dc28-4e99-965b-0069e5c1bbed-22213367194_thumb500.jpg",
+          artist: "The Chainsmokers",
+        },
+        {
+          title: "First Class",
+          songUrl: first_class,
+          songImg:
+            "https://media.pitchfork.com/photos/5929c42069fc7814a47cd7e9/1:1/w_320,c_limit/13a36918.jpg",
+          artist: "Jack Harlow",
         },
       ],
       playerVisible: false,
@@ -213,8 +237,6 @@ class App extends React.Component {
       isPlaying,
       songIndex,
       playerVisible,
-      prevTrack,
-      nextTrack,
     } = this.state;
     return (
       <div className="App">
