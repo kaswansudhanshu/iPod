@@ -1,6 +1,8 @@
 ## About this app
+
 This is a mock ipod app which follows ipod functionality, browsing through folders, playing games, and music,
 This is mainly the front end part of iPod
+Currently you can play some inbuilt songs, change the device theme and homescreen wallpaper.
 
 ## Available Scripts
 
@@ -20,6 +22,3 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-
-
