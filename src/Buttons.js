@@ -1,7 +1,15 @@
 import React from "react";
 
 const Buttons = (props) => {
-  const { deviceTheme, showMenu, handleMenu } = props;
+  const {
+    deviceTheme,
+    showMenu,
+    handleMenu,
+    playpauseTrack,
+    prevTrack,
+    nextTrack,
+  } = props;
+
   return (
     <div className="buttons">
       <div
@@ -14,21 +22,21 @@ const Buttons = (props) => {
           Menu
         </button>
         <div className="center-btns">
-          <button type="button" id="backward">
+          <button type="button" id="backward" onClick={prevTrack}>
             <img
               src="https://cdn-icons-png.flaticon.com/512/39/39712.png"
               alt="previous"
             />
           </button>
           <button type="button" id="select" onClick={handleMenu}></button>
-          <button type="button" id="forward">
+          <button type="button" id="forward" onClick={nextTrack}>
             <img
               src="https://cdn-icons-png.flaticon.com/512/660/660276.png"
               alt="next"
             />
           </button>
         </div>
-        <button type="button" id="play-pause">
+        <button type="button" id="play-pause" onClick={playpauseTrack}>
           <img
             src="https://cdn-icons-png.flaticon.com/512/727/727245.png"
             alt="play-pause"

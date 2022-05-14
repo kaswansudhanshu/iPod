@@ -34,8 +34,6 @@ body {
   height: 150px;
   border: 2px solid #000;
   border-radius: 10px;
-  /* background: url("https://images.unsplash.com/photo-1589846666775-479db3829d33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80")
-    no-repeat center/cover; */
 }
 
 /* Navbar */
@@ -126,6 +124,7 @@ body {
   border-top-left-radius: 9px;
   border-bottom-left-radius: 9px;
   transition: all 0.5s ease-in-out;
+  z-index: 10;
 }
 .menu-title {
   padding: 0.5rem;
@@ -191,4 +190,75 @@ body {
   color: white;
   position: absolute;
   right: 10px;
+}
+
+/* Music Player */
+.audio-player {
+  position: absolute;
+  visibility: hidden;
+  top: -1px;
+  left: -0.5px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  width: 171px;
+  height: 151px;
+  align-items: center;
+  margin: auto;
+  display: flex;
+  font-size: 0.5rem;
+  flex-direction: column;
+  background: linear-gradient(
+    94deg,
+    rgba(186, 183, 232, 1) 0%,
+    rgba(225, 125, 125, 1) 29%,
+    rgba(0, 212, 255, 1) 64%,
+    rgba(21, 114, 133, 1) 86%
+  );
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-track {
+  width: 90%;
+  display: flex;
+  padding: 0.2rem 0;
+  justify-content: space-between;
+}
+
+.track-cover {
+  background: no-repeat center/cover;
+
+  width: 120px;
+  height: 100px;
+}
+
+.slider-container {
+  width: 90%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seek-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: black;
+  width: 80%;
+  margin: 0 0.25rem;
+}
+
+.seek-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
 }

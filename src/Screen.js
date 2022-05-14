@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu } from "./Menu";
 import { Navbar } from "./Navbar";
+import { MusicPlayer } from "./Music";
 
 const Screen = (props) => {
   const {
@@ -14,6 +15,10 @@ const Screen = (props) => {
     currMenu,
     homeScreenWall,
     deviceTheme,
+    songList,
+    isPlaying,
+    songIndex,
+    playerVisible,
   } = props;
   return (
     <div
@@ -48,6 +53,20 @@ const Screen = (props) => {
       {currMenu === 7 && (
         <Menu menuOptions={wallpaperMenu} deviceTheme={deviceTheme} />
       )}
+      {/* {currMenu === 8 && (
+        <MusicPlayer
+          songList={songList}
+          isPlaying={isPlaying}
+          songIndex={songIndex}
+        />
+      )} */}
+
+      <MusicPlayer
+        songList={songList}
+        isPlaying={isPlaying}
+        songIndex={songIndex}
+        playerVisible={playerVisible}
+      />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import Buttons from "./Buttons";
 import Screen from "./Screen";
+import pasoori from "./songs/pasori.mp3";
 
 class App extends React.Component {
   constructor() {
@@ -28,7 +29,7 @@ class App extends React.Component {
       songMenu: [
         {
           title: "Songs",
-          options: ["Song1", "Song2", "Song3", "Song4"],
+          options: ["Pasoori", "Song2", "Song3", "Song4"],
         },
       ],
       themeMenu: [
@@ -51,6 +52,7 @@ class App extends React.Component {
         Songs: 5,
         Themes: 6,
         Wallpapers: 7,
+        MusicPlayer: 8,
       },
       subMenuData: {
         Wallpaper1:
@@ -68,24 +70,50 @@ class App extends React.Component {
         Games:
           "https://images.unsplash.com/photo-1642056446459-1f10774273f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
       },
+      songList: [
+        {
+          title: "Pasoori",
+          songUrl: pasoori,
+          songImg:
+            "https://th.bing.com/th/id/OIP.UWSvU0veAEDSwzsEj0hUCwHaEK?pid=ImgDet&rs=1",
+          artist: "Coke Studio",
+        },
+      ],
+      playerVisible: false,
+      isPlaying: false,
+      songIndex: 0,
     };
   }
+
   handleShowMenu = () => {
     if (this.state.currMenu === 1) {
       this.setState({ currMenu: 0 });
     } else {
       this.setState({ currMenu: 1 });
     }
+    this.setState({
+      playerVisible: false,
+    });
   };
+
   handleMenuTransversal = () => {
     let currMenu = this.state.currMenu;
     if (currMenu === "x" || currMenu === 0) return;
+
+    if (currMenu === 5) {
+      this.handleSongPlayer();
+      return;
+    }
+
+    if (currMenu === 6) {
+      this.handleThemeChange();
+      return;
+    }
     if (currMenu === 7) {
       this.handleWallpaperChange();
       return;
     }
-    if (currMenu === 6) {
-      this.handleThemeChange();
+    if (currMenu === 8) {
       return;
     }
     const selectedMenu = document.querySelector(".active");
@@ -94,6 +122,20 @@ class App extends React.Component {
     if (currMenu) {
       this.setState({ currMenu });
     } else this.setState({ currMenu: "x" });
+  };
+
+  handleSongPlayer = () => {
+    const songSelected = document.querySelector(".active").textContent;
+    const [songMenu] = this.state.songMenu;
+    const songIndex = songMenu.options.indexOf(songSelected);
+    this.setState({
+      currMenu: 8,
+      isPlaying: true,
+      songIndex,
+      playerVisible: true,
+    });
+
+    return;
   };
 
   handleWallpaperChange = () => {
@@ -112,6 +154,49 @@ class App extends React.Component {
     });
   };
 
+  playpauseTrack = () => {
+    // Switch between playing and pausing
+    // depending on the current state
+    if (!this.state.isPlaying) this.playTrack();
+    else this.pauseTrack();
+  };
+
+  playTrack = () => {
+    // Play the loaded track
+    this.setState({
+      isPlaying: true,
+    });
+  };
+
+  pauseTrack = () => {
+    // Pause the loaded track
+    this.setState({
+      isPlaying: false,
+    });
+  };
+
+  nextTrack = () => {
+    let { songIndex, songList } = this.state;
+    // Go back to the first track if the
+    // current one is the last in the track list
+    if (songIndex < songList.length - 1) songIndex += 1;
+    else songIndex = 0;
+    this.setState({
+      songIndex,
+    });
+  };
+  prevTrack = () => {
+    let { songIndex, songList } = this.state;
+    // Go back to the last track if the
+    // current one is the first in the track list
+    if (songIndex > 0) songIndex -= 1;
+    else songIndex = songList.length - 1;
+
+    this.setState({
+      songIndex,
+    });
+  };
+
   render() {
     const {
       mainMenu,
@@ -124,6 +209,12 @@ class App extends React.Component {
       currMenu,
       homeScreenWall,
       deviceTheme,
+      songList,
+      isPlaying,
+      songIndex,
+      playerVisible,
+      prevTrack,
+      nextTrack,
     } = this.state;
     return (
       <div className="App">
@@ -138,12 +229,19 @@ class App extends React.Component {
           songMenu={songMenu}
           themeMenu={themeMenu}
           wallpaperMenu={wallpaperMenu}
+          songList={songList}
+          isPlaying={isPlaying}
+          songIndex={songIndex}
+          playerVisible={playerVisible}
         />
 
         <Buttons
           handleMenu={this.handleMenuTransversal}
           showMenu={this.handleShowMenu}
           deviceTheme={deviceTheme}
+          playpauseTrack={this.playpauseTrack}
+          prevTrack={this.prevTrack}
+          nextTrack={this.nextTrack}
         />
       </div>
     );
