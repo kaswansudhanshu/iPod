@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Navbar = (props) => {
   return (
     <div className="Navbar" style={{ background: props.deviceTheme }}>

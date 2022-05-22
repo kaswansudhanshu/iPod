@@ -1,14 +1,7 @@
 import React from "react";
-
 // songs to be played
 // eslint-disable-next-line
-import pasoori from "./songs/pasoori.mp3";
-// eslint-disable-next-line
-import i_love_u from "./songs/i_love_you.mp3";
-// eslint-disable-next-line
-import as_it_was from "./songs/as_it_was.mp3";
-// eslint-disable-next-line
-import first_class from "./songs/first_class.mp3";
+import { pasoori, i_love_u, as_it_was, first_class } from "./index";
 
 let updateTimer, seek_slider, curr_time, total_duration, curr_song_playing;
 

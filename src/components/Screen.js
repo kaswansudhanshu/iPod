@@ -1,7 +1,5 @@
 import React from "react";
-import { Menu } from "./Menu";
-import { Navbar } from "./Navbar";
-import { MusicPlayer } from "./Music";
+import { Menu, Navbar, MusicPlayer } from "./index";
 
 const Screen = (props) => {
   const {
