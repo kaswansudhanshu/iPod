@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 // songs to be played
 // eslint-disable-next-line
 import { pasoori, i_love_u, as_it_was, first_class } from "./index";
@@ -18,6 +18,7 @@ export function MusicPlayer(props) {
   useEffect(() => {
     //Load the default first track
     loadTrack(songIndex);
+    // eslint-disable-next-line
   }, [songIndex]);
 
   useEffect(() => {
