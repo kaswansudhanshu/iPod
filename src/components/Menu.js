@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { rotater } from "./rotater";
 
 export const Menu = (props) => {
@@ -7,22 +7,21 @@ export const Menu = (props) => {
   const { currMenu } = props;
 
   // Check if the Menu is visible or not
-  React.useEffect(() => {
+  useEffect(() => {
     // if menu is home screen do nothing
-    if (currMenu === 0) {
-    } else if (currMenu === "x") {
-      //If menu selected is dummy menu , Render the name only screen
-      document.querySelector(".alt_screen").style.backgroundColor = "white";
-    } else rotater(); //if menu is visible get the wheel to function
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (currMenu !== 0 && currMenu !== "x") rotater(); //if menu is visible get the wheel to function
+  }, [currMenu]);
 
   if (props.currMenu === 0) {
     return <div className="home_screen"></div>;
   } else if (props.currMenu === "x") {
     return (
-      <div className="alt_screen">
+      <div
+        className="alt_screen"
+        style={{
+          backgroundColor: "white",
+        }}
+      >
         <h2>{altText.textContent}</h2>
       </div>
     );
